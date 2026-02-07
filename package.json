@@ -1,8 +1,16 @@
 {
-  "name": "esp32-live-camera",
+  "name": "esp32-camera-server",
   "version": "1.0.0",
+  "description": "ESP32 Live Camera Streaming Server",
   "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "ws": "^8.14.2"
+  },
+  "engines": {
+    "node": ">=18.x"
   }
 }
