@@ -23,7 +23,7 @@ app.get("/stream", (req, res) => {
     res.write(`Content-Length: ${latestFrame.length}\r\n\r\n`);
     res.write(latestFrame);
     res.write("\r\n");
-  }, 33); // 30 FPS için 33ms (100ms yerine)
+  }, 66); // 15 FPS - Optimal akış
   
   req.on("close", () => clearInterval(interval));
 });
@@ -33,4 +33,4 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("MJPEG server running at 30 FPS"));
+app.listen(PORT, () => console.log("MJPEG server 15 FPS - Optimal streaming"));
