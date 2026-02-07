@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-
 let latestFrame = null;
 
 // ESP32 buraya JPEG gönderir
@@ -16,17 +15,16 @@ app.get("/stream", (req, res) => {
     "Cache-Control": "no-cache",
     "Connection": "keep-alive",
   });
-
+  
   const interval = setInterval(() => {
     if (!latestFrame) return;
-
-    res.write(`--frame\r\n`);
-    res.write(`Content-Type: image/jpeg\r\n`);
+    res.write("--frame\r\n");
+    res.write("Content-Type: image/jpeg\r\n");
     res.write(`Content-Length: ${latestFrame.length}\r\n\r\n`);
     res.write(latestFrame);
     res.write("\r\n");
-  }, 33); // ~10 FPS
-
+  }, 33); // 30 FPS için 33ms (100ms yerine)
+  
   req.on("close", () => clearInterval(interval));
 });
 
@@ -35,4 +33,4 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("MJPEG server running"));
+app.listen(PORT, () => console.log("MJPEG server running at 30 FPS"));
