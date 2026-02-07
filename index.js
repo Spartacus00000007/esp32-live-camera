@@ -25,7 +25,7 @@ app.get("/stream", (req, res) => {
     res.write(`Content-Length: ${latestFrame.length}\r\n\r\n`);
     res.write(latestFrame);
     res.write("\r\n");
-  }, 100); // ~10 FPS
+  }, 33); // ~10 FPS
 
   req.on("close", () => clearInterval(interval));
 });
